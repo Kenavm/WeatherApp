@@ -1,8 +1,8 @@
-async function suggestionsHelper (name) {
-  const url = `http://api.weatherapi.com/v1/search.json?key=3063085c339a4700af7192624231701&q=${name}`;
+async function suggestionsHelper (suggestionString) {
+  const url = `http://api.weatherapi.com/v1/search.json?key=3063085c339a4700af7192624231701&q=${suggestionString}`;
   const response = await fetch(url);
   const data = await response.json();
-  return data;
+  return data.filter(e => e.name.toLocaleLowerCase().includes(suggestionString.toLocaleLowerCase()));
   }
   
   suggestionsHelper("lon");

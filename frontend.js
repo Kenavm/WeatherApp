@@ -15,7 +15,7 @@ input.addEventListener("input", async (e) => {
     if(e.target.value.length >= 3) {
         const suggestionList =  await suggestionsHelper(e.target.value);
        for (const test of suggestionList) {
-        root.innerHTML += test.name; //todo: convert to suggestions in browser
+        console.log(test);
        }
     }
 })
