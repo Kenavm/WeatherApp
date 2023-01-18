@@ -5,6 +5,7 @@ const heading = (city) => `<h2>${city}</h2>`;
 const unorderedList = (temperature, skyConditions, humidty) => `<li>${temperature} </li> <li>${skyConditions} </li> <li>${humidty} </li>`;
 const dataList = () => `<datalist id="cities"></datalist>`;
 const option = (cityName) => `<option value = ${cityName.toLowerCase()}>`;
+const card = (unorderedList) =>`<div id="weather-info"> ${unorderedList} </div>`;
 
 const root = document.getElementById("root");
 
@@ -24,3 +25,17 @@ input.addEventListener("input", async (e) => {
     }
   }
 });
+
+displayCard("London");
+
+async function displayCard(cityName) {
+  const weatherInfo = await getWeatherData(cityName);
+  console.log(weatherInfo);
+  const currentTemperature = weatherInfo.current.temp_c;
+  const currentHumidty = weatherInfo.current.humidity;
+  const currentSkyCondition = weatherInfo.current.condition.text;
+
+  root.innerHTML += card(
+    unorderedList(currentTemperature, currentHumidty, currentSkyCondition)
+  );
+}
