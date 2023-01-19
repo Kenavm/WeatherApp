@@ -12,7 +12,7 @@ const card = (unorderedList) =>
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
-const inputField = document.querySelector(".search-input");
+const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
 const suggBox = document.querySelector(".autocom-box");
 
@@ -26,21 +26,21 @@ inputBox.onkeyup = async (e) => {
       return (listItem = `<li>${listItem.name}</li>`);
     });
     
-    inputField.classList.add("active");
+    searchWrapper.classList.add("active");
     showSuggestions(suggestionListItems);
     let allListItems = document.querySelectorAll("li");
     allListItems.forEach((listItem) => {
       listItem.setAttribute("onclick", "select(this)");
     });
   } else {
-    inputField.classList.remove("active");
+    searchWrapper.classList.remove("active");
   }
 };
 
 const select = (listItem) => {
   let cityName = listItem.textContent;
   displayCard(cityName);
-  inputField.classList.remove("active");
+  searchWrapper.classList.remove("active");
 };
 
 const showSuggestions = (suggestionList) => {
