@@ -49,7 +49,7 @@ const showSuggestions = (suggestionList) => {
   let isArrayEmpty = !suggestionList.length;
 
   if (isArrayEmpty) {
-    let userValue = input.value;
+    let userValue = inputBox.value;
     listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
     listItemsToDisplay = suggestionList.join("");
@@ -64,12 +64,12 @@ const displayCard = async (cityName) => {
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
-  root.innerHTML += card(
+  root.insertAdjacentHTML("beforeend", card(
     unorderedList(
       header,
       currentTemperature,
       currentHumidty,
       currentSkyCondition
     )
-  );
+  ));
 };
