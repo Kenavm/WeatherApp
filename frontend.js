@@ -7,19 +7,46 @@ const unorderedList = (heading, temperature, skyConditions, humidty) =>
 const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
 
+const buttonComponent = (id,text) => `<button id = ${id}>${text}</button>`;
+
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
 const suggBox = document.querySelector(".autocom-box");
+const body = document.querySelector("body");
+body.insertAdjacentHTML("beforeend", buttonComponent("favourite","Favourites"));
+const favouriteButton = document.getElementById("favourite");
+let favouriteArray = [];
+
+favouriteButton.addEventListener("click", ()=> {
+  favouriteArray.pop();
+  const h2 = document.querySelector("h2");
+  favouriteArray.push(h2.textContent);
+  //console.log(favouriteArray);
+
+});
 
 inputBox.onkeyup = async (e) => {
-  console.log("Hello");
+  console.log(e.target.value);
+  if (e.target.value === "") {
+    let div = document.createElement("div");
+    div.id = "favouritesList";
+    console.log(favouriteArray);
+    let arr = [];
+    for (let i = 0; i < favouriteArray.length; i++ ) {
+      arr.push(`<li>${favouriteArray[i]}</li>`);
+    }
+ //   console.log(arr);
+    div.insertAdjacentHTML("afterbegin",arr.join(""));
+    console.log(arr);
+    body.appendChild(div);
+  } else {
   let userData = e.target.value;
   if (userData.length >= 3) {
     const suggestionList = await suggestionsHelper(userData);
-    console.log(suggestionList);
+   // console.log(suggestionList);
     const suggestionListItems = suggestionList.map((listItem) => {
       return (listItem = `<li>${listItem.name}</li>`);
     });
@@ -33,6 +60,7 @@ inputBox.onkeyup = async (e) => {
   } else {
     searchWrapper.classList.remove("active");
   }
+}
 };
 
 const select = (listItem) => {
@@ -47,6 +75,7 @@ const select = (listItem) => {
   searchWrapper.classList.remove("active");
 };
 
+
 const showSuggestions = (suggestionList) => {
   let listItemsToDisplay;
   let isArrayEmpty = !suggestionList.length;
@@ -59,6 +88,7 @@ const showSuggestions = (suggestionList) => {
   }
   suggBox.innerHTML = listItemsToDisplay;
 };
+
 
 const displayCard = async (cityName) => {
   const weatherInfo = await getWeatherData(cityName);

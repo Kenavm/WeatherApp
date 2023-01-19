@@ -106,3 +106,9 @@ h1 {
   margin: 20px;
   color: white;
 }
+
+#favourite {
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin-top: 2%;
+}
