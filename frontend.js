@@ -10,7 +10,7 @@ const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
 
 const root = document.getElementById("root");
-
+root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
