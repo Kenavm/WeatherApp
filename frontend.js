@@ -16,6 +16,7 @@ const suggBox = document.querySelector(".autocom-box");
 const weatherInfoBox = document.querySelector("#weather-info");
 console.log(weatherInfoBox);
 
+
 inputBox.onkeyup = async (e) => {
   console.log("Hello");
   let userData = e.target.value;
@@ -71,5 +72,5 @@ const displayCard = async (cityName) => {
       currentHumidty,
       currentSkyCondition
     )
-  ));
+  );
 };
