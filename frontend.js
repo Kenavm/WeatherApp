@@ -16,6 +16,7 @@ const suggBox = document.querySelector(".autocom-box");
 const weatherInfoBox = document.querySelector("#weather-info");
 console.log(weatherInfoBox);
 
+
 inputBox.onkeyup = async (e) => {
   console.log("Hello");
   let userData = e.target.value;
@@ -64,12 +65,12 @@ const displayCard = async (cityName) => {
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
-  root.innerHTML += card(
+  root.insertAdjacentHTML("beforeend", card(
     unorderedList(
       header,
       currentTemperature,
       currentHumidty,
       currentSkyCondition
-    )
+    ))
   );
 };
