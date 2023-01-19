@@ -6,6 +6,8 @@ const unorderedList = (heading, temperature, skyConditions, humidty) =>
   `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
 const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
+const imageComponent = (imagePath) =>
+  `<div id="image-container><img src=${imagePath} width="500" height="600"> </div>`;
 
 const buttonComponent = (id,text) => `<button id = ${id}>${text}</button>`;
 
@@ -81,7 +83,7 @@ const showSuggestions = (suggestionList) => {
   let isArrayEmpty = !suggestionList.length;
 
   if (isArrayEmpty) {
-    let userValue = input.value;
+    let userValue = inputBox.value;
     listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
     listItemsToDisplay = suggestionList.join("");
@@ -107,5 +109,4 @@ const displayCard = async (cityName) => {
         currentSkyCondition
       )
     )
-  );
-};
+  )};
