@@ -13,9 +13,6 @@ root.innerHTML += inputComponent();
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
 const suggBox = document.querySelector(".autocom-box");
-const weatherInfoBox = document.querySelector("#weather-info");
-console.log(weatherInfoBox);
-
 
 inputBox.onkeyup = async (e) => {
   console.log("Hello");
@@ -41,6 +38,11 @@ inputBox.onkeyup = async (e) => {
 const select = (listItem) => {
   let cityName = listItem.textContent;
   inputBox.value = cityName;
+  const weatherInfoBox = document.querySelector("#weather-info");
+  console.log(weatherInfoBox);
+  if (weatherInfoBox !== null) {
+    weatherInfoBox.remove();
+  }
   displayCard(cityName);
   searchWrapper.classList.remove("active");
 };
@@ -65,12 +67,15 @@ const displayCard = async (cityName) => {
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
-  root.insertAdjacentHTML("beforeend", card(
-    unorderedList(
-      header,
-      currentTemperature,
-      currentHumidty,
-      currentSkyCondition
-    ))
+  root.insertAdjacentHTML(
+    "beforeend",
+    card(
+      unorderedList(
+        header,
+        currentTemperature,
+        currentHumidty,
+        currentSkyCondition
+      )
+    )
   );
 };
