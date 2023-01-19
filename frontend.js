@@ -19,9 +19,9 @@ const input = document.getElementById("input");
 input.addEventListener("input", async (e) => {
   if (e.target.value.length >= 3) {
     const suggestionList = await suggestionsHelper(e.target.value);
-    for (const test of suggestionList) {
-      console.log(test.name);
-      datalist.insertAdjacentHTML("afterbegin", option(test.name));
+    for (const suggestion of suggestionList) {
+      console.log(suggestion.name);
+      datalist.insertAdjacentHTML("afterbegin", option(suggestion.name));
     }
   }
 });
