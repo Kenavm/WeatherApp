@@ -1,13 +1,16 @@
-const inputComponent = () =>`<div class="search-input"> <input id = "input" type="text" placeholder="Type to search..."><div class="autocom-box"></div>`;
+const inputComponent = () =>
+  `<div class="search-input"> <input id = "input" type="text" placeholder="Type to search..."><div class="autocom-box"></div>`;
 const cardComponent = (id) => `<div id=${id}></div>`;
 const heading = (city) => `<h2>${city}</h2>`;
-const unorderedList = (temperature, skyConditions, humidty) =>`<li>${temperature} </li> <li>${skyConditions} </li> <li>${humidty} </li>`;
+const unorderedList = (heading, temperature, skyConditions, humidty) =>
+  `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
 const dataList = () => `<datalist id="cities"></datalist>`;
 const option = (cityName) => `<option value = ${cityName.toLowerCase()}>`;
-const card = (unorderedList) =>  `<div id="weather-info"> ${unorderedList} </div>`;
+const card = (unorderedList) =>
+  `<div id="weather-info"> ${unorderedList} </div>`;
 
 const root = document.getElementById("root");
-
+root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
@@ -15,55 +18,52 @@ const suggBox = document.querySelector(".autocom-box");
 
 inputBox.onkeyup = async (e) => {
   let userData = e.target.value;
-  let emptyArray = [];
+
   if (userData.length >= 3) {
     const suggestionList = await suggestionsHelper(e.target.value);
-    emptyArray = suggestionList.filter((data) => {
-      return data;
+    
+    const suggestionListItems = suggestionList.map((listItem) => {
+      return (listItem = `<li>${listItem.name}</li>`);
     });
-    emptyArray = emptyArray.map((data) => {
-      return (data = `<li>${data.name}</li>`);
-    });
-    console.log(emptyArray);
+    
     searchWrapper.classList.add("active");
-    showSuggestions(emptyArray);
-    let allList = document.querySelectorAll("li");
-    for (let i = 0; i < allList.length; i++) {
-      allList[i].setAttribute("onclick", "select(this)");
-    }
+    showSuggestions(suggestionListItems);
+    let allListItems = document.querySelectorAll("li");
+    allListItems.forEach((listItem) => {
+      listItem.setAttribute("onclick", "select(this)");
+    });
   } else {
     searchWrapper.classList.remove("active");
   }
 };
 
-select = (element) => {
-  let selectUserData = element.textContent;
-  console.log(selectUserData);
-  inputBox.value = selectUserData;
+const select = (listItem) => {
+  let cityName = listItem.textContent;
+  displayCard(cityName);
   searchWrapper.classList.remove("active");
 };
 
-showSuggestions = (list) => {
-  let listData;
-  if (!list.length) {
-    userValue = input.value;
-    listData = `<li>${userValue}</li>`;
+const showSuggestions = (suggestionList) => {
+  let listItemsToDisplay;
+
+  if (!suggestionList.length) {
+    let userValue = input.value;
+    console.log(userValue)
+    listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
-    listData = list.join("");
+    listItemsToDisplay = suggestionList.join("");
   }
-  suggBox.innerHTML = listData;
+  suggBox.innerHTML = listItemsToDisplay;
 };
 
-/* async function displayCard(cityName) {
-const weatherInfo = await getWeatherData(cityName);
-console.log(weatherInfo);
-const currentTemperature = weatherInfo.current.temp_c;
-const currentHumidty = weatherInfo.current.humidity;
-const currentSkyCondition = weatherInfo.current.condition.text;
-
-root.innerHTML += card(
-unorderedList(currentTemperature, currentHumidty, currentSkyCondition)
-);
-}
-displayCard(input.value);
-*/
+const displayCard = async (cityName) => {
+  const weatherInfo = await getWeatherData(cityName);
+  console.log(weatherInfo);
+  const currentTemperature = `Temperature: ${weatherInfo.current.temp_c} degrees celsius`;
+  const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
+  const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
+  const header = heading(cityName)
+  root.innerHTML += card(
+    unorderedList(header, currentTemperature, currentHumidty, currentSkyCondition)
+  );
+};
