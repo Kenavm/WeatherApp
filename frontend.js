@@ -20,6 +20,7 @@ const input = document.getElementById("input");
 
 input.addEventListener("input", async (e) => {
   let first = datalist.firstChild;
+  console.log(first);
   while (first) {
     first.remove();
     first = datalist.firstChild;
@@ -32,7 +33,7 @@ input.addEventListener("input", async (e) => {
     }
   }
   let options = document.getElementsByTagName("option");
-  for (let i = 0; i < options.length;i++) {
+  for (let i = 0; i < options.length; i++) {
     console.log(options[i].value);
   }
 });
