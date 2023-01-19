@@ -12,7 +12,7 @@ const card = (unorderedList) =>
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
-const searchWrapper = document.querySelector(".search-input");
+const inputField = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
 const suggBox = document.querySelector(".autocom-box");
 
@@ -26,28 +26,28 @@ inputBox.onkeyup = async (e) => {
       return (listItem = `<li>${listItem.name}</li>`);
     });
     
-    searchWrapper.classList.add("active");
+    inputField.classList.add("active");
     showSuggestions(suggestionListItems);
     let allListItems = document.querySelectorAll("li");
     allListItems.forEach((listItem) => {
       listItem.setAttribute("onclick", "select(this)");
     });
   } else {
-    searchWrapper.classList.remove("active");
+    inputField.classList.remove("active");
   }
 };
 
 const select = (listItem) => {
   let cityName = listItem.textContent;
   displayCard(cityName);
-  searchWrapper.classList.remove("active");
+  inputField.classList.remove("active");
 };
 
 const showSuggestions = (suggestionList) => {
   let listItemsToDisplay;
 
   if (!suggestionList.length) {
-    userValue = input.value;
+    let userValue = input.value;
     console.log(userValue)
     listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
@@ -57,7 +57,6 @@ const showSuggestions = (suggestionList) => {
 };
 
 const displayCard = async (cityName) => {
-
   const weatherInfo = await getWeatherData(cityName);
   console.log(weatherInfo);
   const currentTemperature = `Temperature: ${weatherInfo.current.temp_c} degrees celsius`;
