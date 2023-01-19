@@ -5,7 +5,8 @@ async function suggestionsHelper(suggestionString) {
   const data = await response.json();
 //  console.log(data);
 
-  return data.filter((e) =>e.name.toLocaleLowerCase().includes(suggestionString.toLocaleLowerCase()));
+  return data;
+  //.filter((e) =>e.name.toLocaleLowerCase().includes(suggestionString.toLocaleLowerCase()));
 }
 
 //suggestionsHelper("lond");
