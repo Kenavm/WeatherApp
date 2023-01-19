@@ -2,8 +2,8 @@ const inputComponent = () =>
   `<div class="search-input"> <input id = "input" type="text" placeholder="Type to search..."><div class="autocom-box"></div>`;
 const cardComponent = (id) => `<div id=${id}></div>`;
 const heading = (city) => `<h2>${city}</h2>`;
-const unorderedList = (temperature, skyConditions, humidty) =>
-  `<li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
+const unorderedList = (heading, temperature, skyConditions, humidty) =>
+  `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
 const dataList = () => `<datalist id="cities"></datalist>`;
 const option = (cityName) => `<option value = ${cityName.toLowerCase()}>`;
 const card = (unorderedList) =>
@@ -57,14 +57,14 @@ const showSuggestions = (suggestionList) => {
 };
 
 const displayCard = async (cityName) => {
-  console.log(cityName);
+
   const weatherInfo = await getWeatherData(cityName);
   console.log(weatherInfo);
   const currentTemperature = `Temperature: ${weatherInfo.current.temp_c} degrees celsius`;
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
-
+  const header = heading(cityName)
   root.innerHTML += card(
-    unorderedList(currentTemperature, currentHumidty, currentSkyCondition)
+    unorderedList(header, currentTemperature, currentHumidty, currentSkyCondition)
   );
 };
