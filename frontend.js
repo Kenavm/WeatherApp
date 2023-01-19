@@ -19,10 +19,9 @@ console.log(weatherInfoBox);
 inputBox.onkeyup = async (e) => {
   console.log("Hello");
   let userData = e.target.value;
-
   if (userData.length >= 3) {
-    const suggestionList = await suggestionsHelper(e.target.value);
-
+    const suggestionList = await suggestionsHelper(userData);
+    console.log(suggestionList);
     const suggestionListItems = suggestionList.map((listItem) => {
       return (listItem = `<li>${listItem.name}</li>`);
     });
@@ -40,21 +39,17 @@ inputBox.onkeyup = async (e) => {
 
 const select = (listItem) => {
   let cityName = listItem.textContent;
-  console.log(cityName);
-  // displayCard(cityName);
   inputBox.value = cityName;
-
-  displayCard(inputBox.value);
-
+  displayCard(cityName);
   searchWrapper.classList.remove("active");
 };
 
 const showSuggestions = (suggestionList) => {
   let listItemsToDisplay;
+  let isArrayEmpty = !suggestionList.length;
 
-  if (!suggestionList.length) {
+  if (isArrayEmpty) {
     let userValue = input.value;
-    console.log(userValue);
     listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
     listItemsToDisplay = suggestionList.join("");
