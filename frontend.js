@@ -33,6 +33,7 @@ inputBox.onkeyup = async (e) => {
     let allList = document.querySelectorAll("li");
     for (let i = 0; i < allList.length; i++) {
       allList[i].setAttribute("onclick", "select(this)");
+
     }
   } else {
     searchWrapper.classList.remove("active");
