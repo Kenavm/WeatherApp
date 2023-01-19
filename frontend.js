@@ -6,6 +6,8 @@ const unorderedList = (heading, temperature, skyConditions, humidty) =>
   `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
 const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
+const imageComponent = (imagePath) =>
+  `<div id="image-container><img src=${imagePath} width="500" height="600"> </div>`;
 
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
@@ -77,5 +79,4 @@ const displayCard = async (cityName) => {
         currentSkyCondition
       )
     )
-  );
-};
+  )};
