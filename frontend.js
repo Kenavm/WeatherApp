@@ -72,5 +72,5 @@ const displayCard = async (cityName) => {
       currentHumidty,
       currentSkyCondition
     )
-  );
+  ));
 };
