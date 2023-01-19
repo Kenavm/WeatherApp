@@ -5,12 +5,10 @@ async function suggestionsHelper(suggestionString) {
   const data = await response.json();
   console.log(data);
 
-  return data.filter((e) =>
-    e.name.toLocaleLowerCase().includes(suggestionString.toLocaleLowerCase())
-  );
+  return data.filter((e) =>e.name.toLocaleLowerCase().includes(suggestionString.toLocaleLowerCase()));
 }
 
-suggestionsHelper("lond");
+//suggestionsHelper("lond");
 
 async function getWeatherData(name) {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=3063085c339a4700af7192624231701&q=${name}`;
@@ -19,4 +17,4 @@ async function getWeatherData(name) {
   return data;
 }
 
-getWeatherData("London");
+//getWeatherData("London");
