@@ -110,6 +110,7 @@ const displayCard = async (cityName) => {
   const header = heading(cityName);
   const imageUrl = await getCityImage(cityName);
   const image = imageComponent(imageUrl);
+  
   root.insertAdjacentHTML(
     "beforeend",
     card(
@@ -118,7 +119,7 @@ const displayCard = async (cityName) => {
         currentTemperature,
         currentHumidty,
         currentSkyCondition,
-        image
+       image
       )
     )
   )};

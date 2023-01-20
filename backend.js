@@ -27,9 +27,8 @@ async function getCityImage(cityName) {
     },
   });
   const data = await response.json();
-  console.log(data)
-  const randomIndex = Math.floor(Math.random()*10);
-  console.log(data.photos[randomIndex].src.medium);
+  console.log(data);
+  const randomIndex = Math.floor(Math.random() * 10);
   return data.photos[randomIndex].src.medium;
 }
 
