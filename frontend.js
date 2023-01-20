@@ -10,31 +10,70 @@ const card = (unorderedList) =>
 const imageComponent = (imagePath) =>
   `<img src=${imagePath} width="500" height="600">`;
 
+const buttonComponent = (id, text) => `<button id = ${id}>${text}</button>`;
+
+
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = document.querySelector("#input");
 const suggBox = document.querySelector(".autocom-box");
+const body = document.querySelector("body");
+body.insertAdjacentHTML(
+  "beforeend",
+  buttonComponent("favourite", "Favourites")
+);
+const favouriteButton = document.getElementById("favourite");
+let favouriteArray = [];
+let div = document.createElement("div");
+body.appendChild(div);
+div.className = "favouritesList";
+
+favouriteButton.addEventListener("click", () => {
+  favouriteArray.pop();
+  const h2 = document.querySelector("h2");
+  favouriteArray.push(h2.textContent);
+  console.log(favouriteArray);
+});
 
 inputBox.onkeyup = async (e) => {
-  console.log("Hello");
-  let userData = e.target.value;
-  if (userData.length >= 3) {
-    const suggestionList = await suggestionsHelper(userData);
-    console.log(suggestionList);
-    const suggestionListItems = suggestionList.map((listItem) => {
-      return (listItem = `<li>${listItem.name}</li>`);
-    });
-
-    searchWrapper.classList.add("active");
-    showSuggestions(suggestionListItems);
-    let allListItems = document.querySelectorAll("li");
-    allListItems.forEach((listItem) => {
-      listItem.setAttribute("onclick", "select(this)");
-    });
+  //console.log(e.target.value);
+  console.log(e.value);
+  const weatherInfo = document.getElementById("weather-info");
+  console.log(weatherInfo);
+  if (e.target.value === "") {
+    div.style.visibility = "visible";
+    if (weatherInfo !== null) {
+      weatherInfo.remove();
+    }
+    console.log(favouriteArray);
+    let arr = [];
+    for (let i = 0; i < favouriteArray.length; i++) {
+      arr.push(`<li class = "favourite">${favouriteArray[i]}</li>`);
+    }
+    console.log(arr);
+    div.insertAdjacentHTML("afterbegin", arr[0]);
+    console.log(arr);
   } else {
-    searchWrapper.classList.remove("active");
+    div.style.visibility = "hidden";
+    let userData = e.target.value;
+    if (userData.length >= 3) {
+      const suggestionList = await suggestionsHelper(userData);
+      // console.log(suggestionList);
+      const suggestionListItems = suggestionList.map((listItem) => {
+        return (listItem = `<li>${listItem.name}</li>`);
+      });
+
+      searchWrapper.classList.add("active");
+      showSuggestions(suggestionListItems);
+      let allListItems = document.querySelectorAll("li");
+      allListItems.forEach((listItem) => {
+        listItem.setAttribute("onclick", "select(this)");
+      });
+    } else {
+      searchWrapper.classList.remove("active");
+    }
   }
 };
 
@@ -42,7 +81,6 @@ const select = (listItem) => {
   let cityName = listItem.textContent;
   inputBox.value = cityName;
   const weatherInfoBox = document.querySelector("#weather-info");
-  console.log(weatherInfoBox);
   if (weatherInfoBox !== null) {
     weatherInfoBox.remove();
   }
@@ -55,7 +93,7 @@ const showSuggestions = (suggestionList) => {
   let isArrayEmpty = !suggestionList.length;
 
   if (isArrayEmpty) {
-    let userValue = inputBox.value;
+    let userValue = input.value;
     listItemsToDisplay = `<li>${userValue}</li>`;
   } else {
     listItemsToDisplay = suggestionList.join("");
@@ -83,6 +121,4 @@ const displayCard = async (cityName) => {
         image
       )
     )
-  )
-
-};
+  )};

@@ -107,3 +107,14 @@ h1 {
   color: white;
 }
 
+#favourite {
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin-top: 2%;
+}
+
+.favourite {
+  margin: 10px;
+  background-color: #644bff;
+  color: white;
+}
