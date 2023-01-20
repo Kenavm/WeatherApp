@@ -2,12 +2,13 @@ const inputComponent = () =>
   `<div class="search-input"> <input id = "input" type="text" placeholder="Type to search..."><div class="autocom-box"></div>`;
 const cardComponent = (id) => `<div id=${id}></div>`;
 const heading = (city) => `<h2>${city}</h2>`;
-const unorderedList = (heading, temperature, skyConditions, humidty) =>
-  `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>`;
+const unorderedList = (heading, temperature, skyConditions, humidty, image) =>
+  `${heading} <br> <li class="weather-attribute">${temperature} </li> <li class="weather-attribute">${skyConditions} </li> <li class="weather-attribute">${humidty} </li>
+  <div> ${image} </div>`;
 const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
 const imageComponent = (imagePath) =>
-  `<div id="image-container><img src=${imagePath} width="500" height="600"> </div>`;
+  `<img src=${imagePath} width="500" height="600">`;
 
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
@@ -65,10 +66,12 @@ const showSuggestions = (suggestionList) => {
 const displayCard = async (cityName) => {
   const weatherInfo = await getWeatherData(cityName);
   console.log(weatherInfo);
-  const currentTemperature = `Temperature: ${weatherInfo.current.temp_c} degrees celsius`;
+  const currentTemperature = `Temperature: ${Math.floor(weatherInfo.current.temp_c)} degrees celsius`;
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
+  const imageUrl = await getCityImage(cityName);
+  const image = imageComponent(imageUrl);
   root.insertAdjacentHTML(
     "beforeend",
     card(
@@ -76,7 +79,10 @@ const displayCard = async (cityName) => {
         header,
         currentTemperature,
         currentHumidty,
-        currentSkyCondition
+        currentSkyCondition,
+        image
       )
     )
-  )};
+  )
+
+};
