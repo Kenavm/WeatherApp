@@ -113,6 +113,8 @@ h1 {
   margin-top: 2%;
 }
 
-.hide {
-  display: none;
+.favourite {
+  margin: 10px;
+  background-color: #644bff;
+  color: white;
 }

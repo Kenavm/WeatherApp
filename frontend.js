@@ -39,18 +39,20 @@ inputBox.onkeyup = async (e) => {
   const weatherInfo = document.getElementById("weather-info");
   console.log(weatherInfo);
   if (e.target.value === "") {
+    div.style.visibility = "visible";
     if (weatherInfo !== null) {
       weatherInfo.remove();
     }
     console.log(favouriteArray);
     let arr = [];
     for (let i = 0; i < favouriteArray.length; i++) {
-      arr.push(`<li>${favouriteArray[i]}</li>`);
+      arr.push(`<li class = "favourite">${favouriteArray[i]}</li>`);
     }
     console.log(arr);
     div.insertAdjacentHTML("afterbegin", arr[0]);
     console.log(arr);
   } else {
+    div.style.visibility = "hidden";
     let userData = e.target.value;
     if (userData.length >= 3) {
       const suggestionList = await suggestionsHelper(userData);
