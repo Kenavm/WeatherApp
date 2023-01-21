@@ -111,6 +111,9 @@ h1 {
   background-color: #fff;
   font-family: "Poppins", sans-serif;
   margin-top: 2%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 .favourite {
