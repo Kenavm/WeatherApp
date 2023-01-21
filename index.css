@@ -7,7 +7,7 @@
 }
 
 body {
-  background: #644bff;
+  background-image: url("./background-image/clouds.jpg");
   padding: 0 20px;
 }
 
@@ -93,8 +93,9 @@ li {
 
 .weather-attribute {
   margin: 10px;
-  background-color: #644bff;
+  background-color: transparent;
   color: white;
+  font-size: 40px;
 }
 
 h2 {
@@ -115,6 +116,6 @@ h1 {
 
 .favourite {
   margin: 10px;
-  background-color: #644bff;
+  background-color: transparent;
   color: white;
 }
