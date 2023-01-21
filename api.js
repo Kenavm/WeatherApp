@@ -11,7 +11,7 @@ async function suggestionsHelper(suggestionString) {
 
 //suggestionsHelper("lond");
 
-async function getWeatherData(name) {
+async function getWeatherData(name) { 
   const url = `https://api.weatherapi.com/v1/forecast.json?key=3063085c339a4700af7192624231701&q=${name}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -28,7 +28,8 @@ async function getCityImage(cityName) {
   });
   const data = await res.json();
   const randomIndex = Math.floor(Math.random() * 10);
-  return data.photos[randomIndex].src.medium;
+  console.log(data);
+  return data.photos[randomIndex].src.landscape;
 }
 
 getCityImage("Vienna");

@@ -8,7 +8,7 @@ const unorderedList = (heading, temperature, skyConditions, humidty, image) =>
 const card = (unorderedList) =>
   `<div id="weather-info"> ${unorderedList} </div>`;
 const imageComponent = (imagePath) =>
-  `<img src=${imagePath} width="500" height="600">`;
+  `<img src=${imagePath} width="1100" height="1200">`;
 
 const buttonComponent = (id, text) => `<button id = ${id}>${text}</button>`;
 
@@ -36,31 +36,28 @@ favouriteButton.addEventListener("click", () => {
 });
 
 inputBox.onkeyup = async (e) => {
-  //console.log(e.target.value);
   const weatherInfo = document.getElementById("weather-info");
   if (e.target.value === "") {
     favouritesContainer.style.visibility = "visible";
     if (weatherInfo !== null) {
       weatherInfo.remove();
     }
-    console.log(favouriteList);
+   
     let favouriteListItems = [];
-    
+
     favouriteList.forEach(favourite => {
-      favouriteListItems.push(`<li onclick="select(this)" class = "favourite">${favourite}</li>`);
+      favouriteListItems.push(`<li onclick="select(this)" class="favourite">${favourite}</li>`);
     })
 
     if (favouriteListItems[0] !== undefined) {
       favouritesContainer.insertAdjacentHTML("afterbegin", favouriteListItems[0]);
     }
     
-    console.log(favouriteListItems);
   } else {
     favouritesContainer.style.visibility = "hidden";
     let userData = e.target.value;
     if (userData.length >= 3) {
       const suggestionList = await suggestionsHelper(userData);
-      // console.log(suggestionList);
       const suggestionListItems = suggestionList.map((listItem) => {
         return (listItem = `<li>${listItem.name}</li>`);
       });
