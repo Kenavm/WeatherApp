@@ -12,7 +12,6 @@ const imageComponent = (imagePath) =>
 
 const buttonComponent = (id, text) => `<button id = ${id}>${text}</button>`;
 
-
 const root = document.getElementById("root");
 root.innerHTML += "<h1>WEATHER APP</h1>";
 root.innerHTML += inputComponent();
@@ -104,7 +103,9 @@ const showSuggestions = (suggestionList) => {
 const displayCard = async (cityName) => {
   const weatherInfo = await getWeatherData(cityName);
   console.log(weatherInfo);
-  const currentTemperature = `Temperature: ${Math.floor(weatherInfo.current.temp_c)} degrees celsius`;
+  const currentTemperature = `Temperature: ${Math.floor(
+    weatherInfo.current.temp_c
+  )} degrees celsius`;
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
@@ -128,4 +129,5 @@ const displayCard = async (cityName) => {
        image
       )   
     )
-  )};
+  );
+};
