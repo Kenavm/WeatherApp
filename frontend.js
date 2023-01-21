@@ -25,40 +25,38 @@ body.insertAdjacentHTML(
 );
 const favouriteButton = document.getElementById("favourite");
 let favouriteList = [];
-let div = document.createElement("div");
-body.appendChild(div);
-div.className = "favouritesList";
+let favouritesContainer = document.createElement("div");
+body.appendChild(favouritesContainer);
+favouritesContainer.className = "favouritesList";
 
 favouriteButton.addEventListener("click", () => {
-  console.log(favouriteList)
   favouriteList.pop();
   const h2 = document.querySelector("h2");
   favouriteList.push(h2.textContent);
-  console.log(favouriteList);
 });
 
 inputBox.onkeyup = async (e) => {
   //console.log(e.target.value);
-  console.log(e.value);
   const weatherInfo = document.getElementById("weather-info");
-  console.log(weatherInfo);
   if (e.target.value === "") {
-    div.style.visibility = "visible";
+    favouritesContainer.style.visibility = "visible";
     if (weatherInfo !== null) {
       weatherInfo.remove();
     }
     console.log(favouriteList);
     let favouriteListItems = [];
-
+    
     favouriteList.forEach(favourite => {
       favouriteListItems.push(`<li onclick="select(this)" class = "favourite">${favourite}</li>`);
     })
 
-    console.log(favouriteListItems);
-    div.insertAdjacentHTML("afterbegin", favouriteListItems[0]);
+    if (favouriteListItems[0] !== undefined) {
+      favouritesContainer.insertAdjacentHTML("afterbegin", favouriteListItems[0]);
+    }
+    
     console.log(favouriteListItems);
   } else {
-    div.style.visibility = "hidden";
+    favouritesContainer.style.visibility = "hidden";
     let userData = e.target.value;
     if (userData.length >= 3) {
       const suggestionList = await suggestionsHelper(userData);
