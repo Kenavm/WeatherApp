@@ -126,8 +126,8 @@ const displayCard = async (cityName) => {
         currentTemperature,
         currentHumidty,
         currentSkyCondition,
-        image
-      )
+       image
+      )   
     )
   );
 };
