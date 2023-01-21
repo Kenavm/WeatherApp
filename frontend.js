@@ -83,6 +83,7 @@ const select = (listItem) => {
   let cityName = listItem.textContent;
   inputBox.value = cityName;
   const weatherInfoBox = document.querySelector("#weather-info");
+ 
   if (weatherInfoBox !== null) {
     weatherInfoBox.remove();
   }
@@ -104,7 +105,10 @@ const showSuggestions = (suggestionList) => {
 };
 
 const displayCard = async (cityName) => {
+  const spinner = document.getElementById("spinner");
+  spinner.removeAttribute('hidden');
   const weatherInfo = await getWeatherData(cityName);
+  spinner.setAttribute('hidden', '');
   console.log(weatherInfo);
   const currentTemperature = `Temperature: ${Math.floor(
     weatherInfo.current.temp_c
