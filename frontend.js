@@ -109,8 +109,14 @@ const displayCard = async (cityName) => {
   const currentHumidty = `Humidty: ${weatherInfo.current.humidity}`;
   const currentSkyCondition = `Sky conditions: ${weatherInfo.current.condition.text}`;
   const header = heading(cityName);
-  const imageUrl = await getCityImage(cityName);
-  const image = imageComponent(imageUrl);
+  let image;
+  try {
+    const imageUrl = await getCityImage(cityName);
+    image = imageComponent(imageUrl);
+  } catch (e) {
+    console.error(e);
+    image = `<section class="error"> No Image found </section>`;
+  }
 
   root.insertAdjacentHTML(
     "beforeend",
