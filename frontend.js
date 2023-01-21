@@ -24,16 +24,17 @@ body.insertAdjacentHTML(
   buttonComponent("favourite", "Favourites")
 );
 const favouriteButton = document.getElementById("favourite");
-let favouriteArray = [];
+let favouriteList = [];
 let div = document.createElement("div");
 body.appendChild(div);
 div.className = "favouritesList";
 
 favouriteButton.addEventListener("click", () => {
-  favouriteArray.pop();
+  console.log(favouriteList)
+  favouriteList.pop();
   const h2 = document.querySelector("h2");
-  favouriteArray.push(h2.textContent);
-  console.log(favouriteArray);
+  favouriteList.push(h2.textContent);
+  console.log(favouriteList);
 });
 
 inputBox.onkeyup = async (e) => {
@@ -46,14 +47,16 @@ inputBox.onkeyup = async (e) => {
     if (weatherInfo !== null) {
       weatherInfo.remove();
     }
-    console.log(favouriteArray);
-    let arr = [];
-    for (let i = 0; i < favouriteArray.length; i++) {
-      arr.push(`<li class = "favourite">${favouriteArray[i]}</li>`);
-    }
-    console.log(arr);
-    div.insertAdjacentHTML("afterbegin", arr[0]);
-    console.log(arr);
+    console.log(favouriteList);
+    let favouriteListItems = [];
+
+    favouriteList.forEach(favourite => {
+      favouriteListItems.push(`<li onclick="select(this)" class = "favourite">${favourite}</li>`);
+    })
+
+    console.log(favouriteListItems);
+    div.insertAdjacentHTML("afterbegin", favouriteListItems[0]);
+    console.log(favouriteListItems);
   } else {
     div.style.visibility = "hidden";
     let userData = e.target.value;
